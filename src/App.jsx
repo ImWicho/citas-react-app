@@ -4,11 +4,13 @@ import ListUsers from './components/ListUsers'
 
 function App() {
 	return (
-		<>
+		<div className='container m-auto mt-20'>
 			<Header />
-			<Form />
-			<ListUsers />
-		</>
+			<div className='mt-12 md:flex'>
+				<Form />
+				<ListUsers />
+			</div>
+		</div>
 	)
 }
 
