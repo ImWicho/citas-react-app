@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Form = () => {
+const Form = ({ pacientes, setPacientes }) => {
 	const [nombreMascota, setNombreMascota] = useState('')
 	const [propietario, setPropietario] = useState('')
 	const [email, setEmail] = useState('')
@@ -16,6 +16,13 @@ const Form = () => {
 		}
 
 		setError(false)
+		setPacientes([...pacientes, { nombreMascota, propietario, email, fecha, sintomas }])
+
+		setNombreMascota('')
+		setPropietario('')
+		setEmail('')
+		setFecha('')
+		setSintomas('')
 	}
 
 	return (
