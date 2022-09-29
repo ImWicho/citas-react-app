@@ -1,6 +1,6 @@
 import User from './User'
 
-const ListUsers = ({ pacientes, setPaciente }) => {
+const ListUsers = ({ pacientes, setPaciente, deleteUser }) => {
 	return (
 		<div className='md:w-1/2 lg:w-3/5'>
 			{pacientes && pacientes.length ? (
@@ -11,7 +11,7 @@ const ListUsers = ({ pacientes, setPaciente }) => {
 					</p>
 
 					{pacientes.map((user) => (
-						<User key={user.id} user={user} setPaciente={setPaciente} />
+						<User key={user.id} user={user} setPaciente={setPaciente} deleteUser={deleteUser} />
 					))}
 				</>
 			) : (

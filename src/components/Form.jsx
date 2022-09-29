@@ -16,8 +16,6 @@ const Form = ({ pacientes, setPacientes, user, setUser }) => {
 			setEmail(user.email)
 			setFecha(user.fecha)
 			setSintomas(user.sintomas)
-		} else {
-			console.log('No hay nada')
 		}
 	}, [user])
 
