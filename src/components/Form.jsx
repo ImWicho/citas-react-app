@@ -1,13 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Error from './Error'
 
-const Form = ({ pacientes, setPacientes }) => {
+const Form = ({ pacientes, setPacientes, user }) => {
 	const [nombreMascota, setNombreMascota] = useState('')
 	const [propietario, setPropietario] = useState('')
 	const [email, setEmail] = useState('')
 	const [fecha, setFecha] = useState('')
 	const [sintomas, setSintomas] = useState('')
 	const [error, setError] = useState(false)
+
+	useEffect(() => {
+		if (Object.keys(user).length > 0) {
+			setNombreMascota(user.nombreMascota)
+			setPropietario(user.propietario)
+			setEmail(user.email)
+			setFecha(user.fecha)
+			setSintomas(user.sintomas)
+		} else {
+			console.log('No hay nada')
+		}
+	}, [user])
 
 	const generateId = () => Math.random().toString(36).slice(2)
 
