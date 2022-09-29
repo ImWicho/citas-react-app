@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Error from './Error'
 
-const Form = ({ pacientes, setPacientes, user }) => {
+const Form = ({ pacientes, setPacientes, user, setUser }) => {
 	const [nombreMascota, setNombreMascota] = useState('')
 	const [propietario, setPropietario] = useState('')
 	const [email, setEmail] = useState('')
@@ -32,10 +32,23 @@ const Form = ({ pacientes, setPacientes, user }) => {
 		}
 
 		setError(false)
-		setPacientes([
-			...pacientes,
-			{ nombreMascota, propietario, email, fecha, sintomas, id: generateId() },
-		])
+		const objUser = {
+			nombreMascota,
+			propietario,
+			email,
+			fecha,
+			sintomas,
+		}
+		if (user.id) {
+			objUser.id = user.id
+
+			const usersUpdated = pacientes.map((x) => (x.id === user.id ? objUser : x))
+			setPacientes(usersUpdated)
+			setUser({})
+		} else {
+			objUser.id = generateId()
+			setPacientes([...pacientes, objUser])
+		}
 
 		setNombreMascota('')
 		setPropietario('')
@@ -120,7 +133,7 @@ const Form = ({ pacientes, setPacientes, user }) => {
 				<input
 					type='submit'
 					className='bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all rounded-lg'
-					value='Agregar Paciente'
+					value={user.id ? 'Editar paciente' : 'Agregar paciente'}
 				/>
 			</form>
 		</div>
